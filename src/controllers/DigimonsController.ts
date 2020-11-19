@@ -16,3 +16,59 @@ export function get(req: Request, res: Response) {
         res.status(400).send(error);
     }
 }
+export function getByName(req: Request, res: Response) {
+    try {
+      const name = (req.params.name && req.params.name) || undefined;
+      if (!name) {
+        throw "Se requiere el name del digimon.";
+      }
+      const digimons = DigimonsService.getByName(name);
+      res.status(200).json(digimons);
+    } catch (error) {
+      res.status(400).send(error);
+    }
+  }
+  
+  export function getByType(req: Request, res: Response) {
+    try {
+      const type = (req.params.type && req.params.type) || undefined;
+      if (!type) {
+        throw "Se requiere el Tipo del digimon.";
+      }
+      const digimons = DigimonsService.getByType(type);
+      res.status(200).json(digimons);
+    } catch (error) {
+      res.status(400).send(error);
+    }
+  }
+  
+  export function getVersus(req: Request, res: Response) {
+    try {
+      const weakAgainst =
+        (req.params.weakAgainst && req.params.weakAgainst) || undefined;
+      if (!weakAgainst) {
+        throw "Type Requiered";
+      }
+      const digimons = DigimonsService.getVersus(weakAgainst);
+      res.status(200).json(digimons);
+    } catch (error) {
+      res.status(400).send(error);
+    }
+  }
+  export function createDigimon(req: Request, res: Response) {
+    try {
+      const {
+        name, tName, tStrongAgainst, tWeakAgainst, img,
+      } = req.body;
+      if (!name || !tName || !tStrongAgainst || !tWeakAgainst || !img) {
+        throw "Type data";
+      }
+      const digimons = DigimonsService.createDigimon(
+        name, tName, tStrongAgainst, tWeakAgainst, img
+      );
+  
+      res.status(200).json(digimons);
+    } catch (error) {
+      res.status(400).send(error);
+    }
+  }
