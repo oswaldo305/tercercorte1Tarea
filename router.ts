@@ -21,4 +21,4 @@ router.post("/", (req, res) => {
 router.get("/digimons/name/:name", DigimonsController.getByName);
 router.get("/digimons/type/:type", DigimonsController.getByType);
 router.get("/digimons/versus/:weakAgainst", DigimonsController.getVersus);
-router.post("/digimons/new", DigimonsController.createDigimon);
+router.post("/digimons/create", DigimonsController.createDigimon);
